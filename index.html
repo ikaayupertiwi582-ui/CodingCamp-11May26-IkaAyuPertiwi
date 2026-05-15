@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Storage error banner -->
+  <div id="storage-error-banner" hidden>
+    <span id="storage-error-msg"></span>
+    <button id="storage-error-dismiss" aria-label="Dismiss">&#x2715;</button>
+  </div>
+
+  <main>
+    <!-- Balance Display -->
+    <section id="balance-section">
+      <h1>Expense &amp; Budget Visualizer</h1>
+      <div class="balance-card">
+        <span class="balance-label">Total Spending</span>
+        <span id="balance">$0.00</span>
+      </div>
+    </section>
+
+    <div class="content-grid">
+
+      <!-- Left column: Form + Transaction List -->
+      <div class="left-col">
+
+        <!-- Input Form -->
+        <section id="form-section">
+          <h2>Add Expense</h2>
+          <form id="expense-form" novalidate>
+            <div class="field-group">
+              <label for="item-name">Item Name</label>
+              <input
+                type="text"
+                id="item-name"
+                maxlength="100"
+                placeholder="e.g. Lunch, Bus ticket…"
+                autocomplete="off"
+              />
+              <span class="error-msg" id="name-error"></span>
+            </div>
+
+            <div class="field-group">
+              <label for="item-amount">Amount ($)</label>
+              <input
+                type="number"
+                id="item-amount"
+                min="0.01"
+                max="999999.99"
+                step="0.01"
+                placeholder="0.00"
+              />
+              <span class="error-msg" id="amount-error"></span>
+            </div>
+
+            <div class="field-group">
+              <label for="item-category">Category</label>
+              <select id="item-category">
+                <option value="" disabled selected>Select a category</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Fun">Fun</option>
+              </select>
+              <span class="error-msg" id="category-error"></span>
+            </div>
+
+            <button type="submit" id="add-btn">Add Expense</button>
+          </form>
+        </section>
+
+        <!-- Transaction List -->
+        <section id="list-section">
+          <h2>Transactions</h2>
+          <div id="list-container">
+            <ul id="transaction-list">
+              <li class="empty-state">No transactions yet.</li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right column: Chart -->
+      <div class="right-col">
+        <section id="chart-section">
+          <h2>Spending by Category</h2>
+          <div class="chart-wrapper">
+            <canvas id="expense-chart"></canvas>
+            <p id="chart-empty">No data to display</p>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- App logic -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>
